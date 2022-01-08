@@ -1,6 +1,11 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 
+session_start();
+//REMOVE THESE LATER
+$_SESSION['userID'] = 2;
+$_SESSION['loggedIn'] = true;
+
 require_once "classes/PPokerActions.php";
 require_once "classes/PPokerData.php";
 require_once "views/Page.php";
