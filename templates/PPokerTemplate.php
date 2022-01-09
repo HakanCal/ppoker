@@ -1,4 +1,4 @@
-<form action="index.php?page=PPoker" method="post">
+<form action="index.php?page=PPoker&room=<?php echo $roomID;?>" method="post">
     <input type="radio" name="ppoker_select" id="value1" value="1">
     <label for="value1">1</label><br>
     <input type="radio" name="ppoker_select" id="value2" value="2">

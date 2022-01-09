@@ -2,10 +2,11 @@
 error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 
 session_start();
-//REMOVE THESE LATER
-$_SESSION['userID'] = 2;
-$_SESSION['loggedIn'] = true;
-
+if(isset($_POST['logout'])) {
+    session_unset(); 
+    session_destroy();
+}
+// NECESSARY FOR MVC
 require_once "classes/PPokerActions.php";
 require_once "classes/PPokerData.php";
 require_once "views/Page.php";
@@ -18,14 +19,15 @@ if(isset($_REQUEST['page'])){
     $page="Homepage";
 }
 
-//catch wrong page requests
 $pagePath = "views/".$page.".php";
+// Catch wrong page requests
 if(!file_exists($pagePath)){
-    $pagePath = "views/ErrorPage.php";
-    $page = "ErrorPage";
+    $page = "Homepage";
+    $pagePath = "views/".$page.".php";
 }
-require_once $pagePath;
+
 //include view from page request
+require_once $pagePath;
 
 $model = new PPokerData();
 $controller = new PPokerActions($model);

@@ -14,6 +14,14 @@ class PPokerData {
         }
     }
     //getters
+    function getUserByEmailAndPwd($email, $pwd){
+        $sql="SELECT * from benutzer WHERE email=:mail AND passwort=:pwd";
+        $stmt= $this->dbh->prepare($sql);
+        $stmt->bindValue(":mail", $email);
+        $stmt->bindValue(":pwd", $pwd);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
     function getSelection($participantID, $roomID){
         $sql = "SELECT punktzahl FROM teilnehmer WHERE 
         teilnehmerID = :participantID AND 
@@ -37,6 +45,21 @@ class PPokerData {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    function getParticipationsByRoom($roomID){
+        $sql = "SELECT * FROM teilnehmer WHERE raumid = :roomID";
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(":roomID",$roomID);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    function getParticipationByUserAndRoom($userID,$roomID){
+        $sql = "SELECT * FROM teilnehmer WHERE teilnehmerid = :userID AND raumid = :roomID";
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(":userID",$userID);
+        $stmt->bindValue(":roomID",$roomID);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
     function getRoom($roomID){
         $sql = "SELECT * FROM raum WHERE raumid = :roomID";
         $stmt = $this->dbh->prepare($sql);
@@ -45,6 +68,15 @@ class PPokerData {
         return $stmt->fetch();
     }
     //setters
+    function createUser($name, $familyName, $hashPwd, $email){
+        $sql="INSERT INTO benutzer (vorname, nachname, email, passwort) VALUES (:name, :familyname, :mail , :pwd) ";
+        $stmt= $this->dbh->prepare($sql);
+        $stmt->bindValue(":name",$name);
+        $stmt->bindValue(":familyname",$familyName);
+        $stmt->bindValue(":mail",$email);
+        $stmt->bindValue(":pwd",$hashPwd);
+        $stmt->execute();
+    }
     function setSelection($teilnehmerID, $roomID, $selection){
         $sql = "UPDATE teilnehmer SET punktzahl = :selection WHERE teilnehmerID = :teilnehmerID AND raumID = :roomID";
         $stmt = $this->dbh->prepare($sql);
@@ -73,22 +105,13 @@ class PPokerData {
         $stmt->bindValue(":roomID", $roomID);
         return $stmt->execute();
     }
-
-    /*
-    TODO 
-    function updateRoomName($roomID,$name){
-        $sql = "UPDATE raum SET name = :name WHERE raumID = :roomID";
+    function setRoomResults($roomID, $avg, $max, $min){
+        $sql = "UPDATE raum SET mittelwert = :avg , max = ':max' , min = :min WHERE raumid = :roomID";
         $stmt = $this->dbh->prepare($sql);
-        $stmt->bindValue(":name",$name);
-        $stmt->bindValue(":roomID",$roomID);
-        $stmt->execute();
+        $stmt->bindValue(":roomID", $roomID);
+        $stmt->bindValue(":avg", $avg);
+        $stmt->bindValue(":max", $max);
+        $stmt->bindValue(":min", $min);
+        return $stmt->execute();
     }
-    function updateRoomDescription($roomID,$description){
-        $sql = "UPDATE raum SET beschreibung = :description WHERE raumID = :roomID";
-        $stmt = $this->dbh->prepare($sql);
-        $stmt->bindValue(":description",$description);
-        $stmt->bindValue(":roomID",$roomID);
-        $stmt->execute();
-    }
-    */
 }

@@ -15,13 +15,13 @@ class Results extends Page implements PageInterface{
             ";
             // iterate through all games user has been invited but only show those where a selection was made
             foreach($this->model->getParticipationsByUser($_SESSION['userID']) as $participation){
-                if(isset($participation['punktzahl'])){
+                $room = $this->model->getRoom($participation['raumid']);
+                if(isset($participation['punktzahl']) && isset($room['mittelwert'])){
                     $name = "";
                     $description = "";
                     $avg = 0;
                     $max = 0;
                     $min = 0;
-                    $room = $this->model->getRoom($participation['raumid']);
                     $name = $room['name'];
                     $description = $room['beschreibung'];
                     if(!is_null($room['mittelwert'])){

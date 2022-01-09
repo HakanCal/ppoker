@@ -2,7 +2,7 @@
 class Creationmenu extends Page implements PageInterface{
     
     function output(): string{
-        if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
+        if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']){
             //check if form was submitted 
             if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
                 $roomName = htmlspecialchars($_POST['roomName']);

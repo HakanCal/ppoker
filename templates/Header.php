@@ -23,6 +23,17 @@
             <li class="nav-item">
               <a class="nav-link" href="index.php?page=Results">Ergebnisse</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?page=Login">Anmelden</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.php?page=Registration">Registrieren</a>
+            </li>
           </ul>
+            <?php if(isset($_SESSION['loggedIn'])) :?>
+            <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+              <button class="btn btn-danger navbar-btn" name="logout" type="submit">Logout</button>
+            </form>
+            <?php endif; ?>
         </div>
       </nav>
