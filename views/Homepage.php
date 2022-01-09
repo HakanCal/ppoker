@@ -1,4 +1,7 @@
 <?php 
+/*
+    DISPLAYS THE HOMEPAGE AND INVITATION FOR GAMES IF USER IS LOGGED IN
+ */
 class Homepage extends Page implements PageInterface{
     
     public function output() : string {

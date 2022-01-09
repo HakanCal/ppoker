@@ -1,4 +1,10 @@
 <?php
+/*
+    DISPLAYS THE GAME MENU 
+    HANDLES ITS OWN POST REQUEST FOR USER SELECTION
+    ROOM CREATOR ALSO HAS BUTTON TO EVALUATE GAME AND END ROOM
+    REDIRECTS TO RESULTS TABLE
+*/
 class PPoker extends Page implements PageInterface{
     
     function output(): string{

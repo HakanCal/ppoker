@@ -1,3 +1,4 @@
+<!-- GAME CREATION MENU-->
 <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
     <div class="form-group">
         <label for="firstname">Vorname</label>

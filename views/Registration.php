@@ -1,4 +1,8 @@
 <?php 
+/*
+    DISPLAYS SIMPLE REGISTRATION PAGE
+    HANDLES ITS OWN POST REQUEST
+ */
 class Registration extends Page implements PageInterface{
     
     function output(): string{

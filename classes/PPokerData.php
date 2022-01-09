@@ -1,5 +1,8 @@
 <?php
-
+/*
+    FUNCTIONS FOR DATABASES
+    PDO WAS USED
+ */
 class PPokerData {
     private $dbh;
     function __construct(){
