@@ -1,4 +1,8 @@
 <?php 
+/*
+    DISPLAYS SIMPLE LOGIN PAGE
+    HANDLES ITS OWN POST REQUEST FOR LOGIN
+ */
 class Login extends Page implements PageInterface{
     
     function output(): string{

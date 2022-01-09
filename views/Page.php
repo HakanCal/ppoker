@@ -1,5 +1,5 @@
 <?php
-
+// PARENT CLASS FOR ALL VIEWS
 class Page {
     protected $model;
     protected $controller;

@@ -1,3 +1,4 @@
+<!-- DEFAULT HEADER AND FOOTER PAGEWITH CONTENT-->
 <?php require "Header.php"; ?>
 <?php if(isset($info)){echo $info;} ?>
 <div class="container">

@@ -1,5 +1,7 @@
 <?php 
-
+/*
+    FUNCTIONS THAT ARE USED FOR THE VIEWS AS PER MVC MODEL
+ */
 class PPokerActions{
     
     private $model;

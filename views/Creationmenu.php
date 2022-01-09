@@ -1,4 +1,8 @@
 <?php
+/*
+    CREATION CLASS OUTPUTS THE MENU TO CREATE A GAME OF PPOKER
+    PAGE ALSO HANDLES IT POST REQUEST AND REDIRECTS TO GAME
+*/
 class Creationmenu extends Page implements PageInterface{
     
     function output(): string{

@@ -1,4 +1,9 @@
 <?php
+/*
+    DISPLAYS RESULTS OF ALL GAMES THE CURRENT USER SELECTED SOMETHING AND
+    ROOM WAS EVALUATED
+    CREATES A TABLE WITH ALL GAMES
+ */
 class Results extends Page implements PageInterface{
     function output(): string{
         ob_start();
