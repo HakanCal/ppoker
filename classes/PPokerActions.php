@@ -109,7 +109,7 @@ class PPokerActions{
             }
         }
         // IF NO ONE SELECTED ANYTHING JUST PLACE 0
-        if($points){
+        if(empty($points)){
             $points = array(0);
         }
         $avg = $this->calculateAvg($points);
@@ -126,19 +126,21 @@ class PPokerActions{
         return is_array($this->model->getUser($email));
     }
     // ADDS USER VIA HIS EMAIL TO ROOM 
-    function inviteUser($email,$roomID): bool{
+    function inviteUser($email,$roomID){
         if($this->emailExists($email)){
             $user = $this->model->getUser($email);
             $userID = $user['userid'];
             if(!$this->isParticipant($userID,$roomID)){
                 $this->joinRoom($userID,$roomID);
-                return true;
             }
-            return false;
         }
     }
     // CHECKS IF USER IS PARTICIPANT OF ROOM
     function isParticipant($userID, $roomID): bool{
         return is_array($this->model->getParticipationByUserAndRoom($userID,$roomID));
+    }
+    function isRoomDone($roomID){
+        $room = $this->model->getRoom($roomID);
+        return isset($room['mittelwert']);
     }
 }

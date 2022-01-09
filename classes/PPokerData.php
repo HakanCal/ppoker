@@ -38,6 +38,13 @@ class PPokerData {
         $stmt->execute();
         return $stmt->fetch();
     }
+    function getUserByID($userID){
+        $sql = "SELECT * FROM benutzer WHERE userid = :userID";
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(":userID",$userID);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
     function getParticipationsByUser($userID){
         $sql = "SELECT * FROM teilnehmer WHERE teilnehmerid = :userID";
         $stmt = $this->dbh->prepare($sql);
@@ -106,12 +113,19 @@ class PPokerData {
         return $stmt->execute();
     }
     function setRoomResults($roomID, $avg, $max, $min){
-        $sql = "UPDATE raum SET mittelwert = :avg , max = ':max' , min = :min WHERE raumid = :roomID";
+        $sql = "UPDATE raum SET mittelwert = :average , maximum = :maximum , minimum = :minimum WHERE raumid = :roomID";
         $stmt = $this->dbh->prepare($sql);
         $stmt->bindValue(":roomID", $roomID);
-        $stmt->bindValue(":avg", $avg);
-        $stmt->bindValue(":max", $max);
-        $stmt->bindValue(":min", $min);
+        $stmt->bindValue(":average", $avg);
+        $stmt->bindValue(":maximum", $max);
+        $stmt->bindValue(":minimum", $min);
+        return $stmt->execute();
+    }
+    function deleteParticipation($userID,$roomID){
+        $sql = "DELETE FROM teilnehmer WHERE teilnehmerid = :userID AND raumid = :roomID";
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue(":userID", $userID);
+        $stmt->bindValue(":roomID", $roomID);
         return $stmt->execute();
     }
 }

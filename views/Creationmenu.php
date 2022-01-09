@@ -2,47 +2,53 @@
 class Creationmenu extends Page implements PageInterface{
     
     function output(): string{
+        // USER HAS TO BE LOGGED IN FOR THIS PAGE
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']){
-            //check if form was submitted 
+            //IF FORM WAS SUBMITTED 
             if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
                 $roomName = htmlspecialchars($_POST['roomName']);
                 $roomDescription = htmlspecialchars($_POST['roomDescription']);
-                // only a title for the room is necessary
-                if(isset($roomName)){
-                    // insert room into db and get its key/id
+                // ROOM NEEDS ONLY TITLE
+                if(!empty($roomName)){
+                    // INSERT NAME, DESCRIPTION AND CREATOR TO ROOM
                     $roomID = $this->model->setRoom(
                         $roomName,
                         $roomDescription,
-                        $_SESSION['userID']);
+                        $_SESSION['userID']
+                    );
+                    //CREATOR JOINS ROOM IMMEDIATELY
                     $this->controller->joinRoom($_SESSION['userID'],$roomID);
-                    if (isset($_POST["emails"]) && is_array($_POST["emails"])){ 
+
+                    // INVITE OTHERS EXCEPT YOURSELF BY EMAIL
+                    $myEmail = $this->model->getUser($_SESSION['userID'])['email'];
+                    if (isset($_POST["emails"]) && is_array($_POST["emails"])){
                         $emails = $_POST['emails'];
-                        // only invite registered users/emails
+                        $emails = array_unique($emails); // PREVENT SAME USER INVITATIONS 
                         foreach($emails as $email){
-                            if($this->controller->emailExists($email)){
+                            $email = htmlspecialchars($email);
+                            if($email != $myEmail ){
                                 $this->controller->inviteUser($email,$roomID);
                             }
                         }
                     }
-                    //echo "<a href=index.php?page=PPoker&room=$roomID>weiter</a>";
-                    // redirect to the game after creation
+                    // REDIRECT TO GAME
                     header("Location: index.php?page=PPoker&room=$roomID");
                     exit;
                 }
-            //Creation page
-            }else{
-                $title = "PPOKER RAUM ERSTELLEN";
-                ob_start();
-                require "templates/createTemplate.php";
-                $content =  ob_get_contents();
-                ob_clean();
-                require "templates/defaultTemplate.php";
+            //IF NOT SUBMITTED OR NO NAME SET:
             }
+            $title = "PPOKER RAUM ERSTELLEN";
+            ob_start();
+            require "templates/createTemplate.php";
+            $content =  ob_get_contents();
+            ob_clean();
+            require "templates/defaultTemplate.php";
             $html = ob_get_contents();
             ob_end_clean();
             return $html;
-        }else{
-            header('Location: index.php?page=Login');
         }
+        // IF NOT LOGGED IN
+        header('Location: index.php?page=Login');
+        exit;
     }
 }

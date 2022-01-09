@@ -27,11 +27,11 @@ class Results extends Page implements PageInterface{
                     if(!is_null($room['mittelwert'])){
                         $avg = $room['mittelwert'];
                     }
-                    if(!is_null($room['max'])){
-                        $max = $room['max'];
+                    if(!is_null($room['maximum'])){
+                        $max = $room['maximum'];
                     }
-                    if(!is_null($room['min'])){
-                        $min = $room['min'];
+                    if(!is_null($room['minimum'])){
+                        $min = $room['minimum'];
                     }
                     echo "
                         <tr>
