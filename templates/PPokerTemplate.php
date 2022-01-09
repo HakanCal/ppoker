@@ -1,24 +1,58 @@
-<div class="col">
-    <form action="index.php?page=PPoker&room=<?php echo $roomID;?>" method="post">
-        <input type="radio" name="ppoker_select" id="value1" value="1">
-        <label for="value1">1</label><br>
-        <input type="radio" name="ppoker_select" id="value2" value="2">
-        <label for="value2">2</label><br>
-        <input type="radio" name="ppoker_select" id="value3" value="3">
-        <label for="value3">3</label><br>
-        <input type="radio" name="ppoker_select" id="value5" value="5">
-        <label for="value5">5</label><br>
-        <input type="radio" name="ppoker_select" id="value8" value="8">
-        <label for="value8">8</label><br>
-        <input type="radio" name="ppoker_select" id="value13" value="13">
-        <label for="value13">13</label><br>
-        <input type="radio" name="ppoker_select" id="value20" value="20">
-        <label for="value20">20</label><br>
-        <input type="submit">
-    </form>
+<!-- 
+NOT OUR CODE
+SOURCE:
+https://codepen.io/adamstuartclark/pen/pbYVYR
+-->
+<link rel="stylesheet" href="css/style.css">
+<form action="index.php?page=PPoker&room=<?php echo $roomID;?>" method="post">
+<h2><?php echo $ppoker_title; ?></h2>
+<h4><?php echo $ppoker_description ?></h4>
+<h3>Bitte wähle eine Karte aus</h3>
+<section>
+<div>
+  <input type="radio" id="control_01" name="ppoker_select" value="1">
+  <label for="control_01">
+    <h2>1</h2>
+  </label>
 </div>
-<div class="col">
-    <h3 class="row"> <?php echo $ppoker_title; ?></h3>
-    <div class="row"> <?php echo $ppoker_description ?></div>
-    <div class="row"><?php echo $ppoker_evaluate_btn ?></div>
+<div>
+  <input type="radio" id="control_02" name="ppoker_select" value="2">
+  <label for="control_02">
+    <h2>2</h2>
+  </label>
 </div>
+<div>
+  <input type="radio" id="control_03" name="ppoker_select" value="3">
+  <label for="control_03">
+    <h2>3</h2>
+  </label>
+</div>
+<div>
+  <input type="radio" id="control_04" name="ppoker_select" value="5">
+  <label for="control_04">
+    <h2>5</h2>
+  </label>
+</div>
+<div>
+  <input type="radio" id="control_05" name="ppoker_select" value="8">
+  <label for="control_05">
+    <h2>8</h2>
+  </label>
+</div>
+<div>
+  <input type="radio" id="control_06" name="ppoker_select" value="13">
+  <label for="control_06">
+    <h2>13</h2>
+  </label>
+</div>
+<div>
+  <input type="radio" id="control_07" name="ppoker_select" value="20">
+  <label for="control_07">
+    <h2>20</h2>
+  </label>
+</div>
+</section>
+<button class="btn btn-primary" type="submit" name="submit" value="Submit">Auswählen</button>
+</form>
+<br>
+<div class="row"><?php echo $ppoker_evaluate_btn ?></div>

@@ -10,11 +10,12 @@ class Homepage extends Page implements PageInterface{
             }
             // SHOW INVITES / PARTICIPATIONS
             echo "
+                <div class='table-responsive'>
                 <table class='table table-striped'>
                 <tr>
-                    <th>Titel</th>
-                    <th>Beschreibung</th>
-                    <th colspan='2'>Aktion</th>
+                    <th scope='col'>Titel</th>
+                    <th scope='col'>Beschreibung</th>
+                    <th scope='col' colspan='2'>Aktion</th>
                 </tr>
             ";
             // USER CAN JOIN ONGOING GAMES 
@@ -37,7 +38,7 @@ class Homepage extends Page implements PageInterface{
                     }
                 }
             }
-            echo "</table>";
+            echo "</table> </div>";
             
             // then join from them 
             $title1 = "Einladungen und offene Spiele";

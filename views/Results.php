@@ -5,6 +5,7 @@ class Results extends Page implements PageInterface{
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true){
             //RESULTS
             echo "
+            <div class='table-responsive'>
                 <table class='table table-striped'><tr>
                     <th>Titel</th>
                     <th>Beschreibung</th>
@@ -13,10 +14,10 @@ class Results extends Page implements PageInterface{
                     <th>Minimum</th>
                 </tr>
             ";
-            // iterate through all games user has been invited but only show those where a selection was made
+            // SHOW ALL GAMES WHERE SELECTION WAS MADE AND GAME IS DONE
             foreach($this->model->getParticipationsByUser($_SESSION['userID']) as $participation){
                 $room = $this->model->getRoom($participation['raumid']);
-                if(isset($participation['punktzahl']) && isset($room['mittelwert'])){
+                if(isset($participation['punktzahl']) && $this->controller->isRoomDone($room['raumid'])){
                     $name = "";
                     $description = "";
                     $avg = 0;
@@ -44,9 +45,10 @@ class Results extends Page implements PageInterface{
                     ";
                 }
             }
-            echo "</table>";
+            echo "</table></div>";
         }else{
             header('Location: index.php?page=Login');
+            exit;
         }
         $title = "Spiele Verlauf";
         $content = ob_get_contents();

@@ -23,4 +23,4 @@
       </div>
     </div>    
   </div>
-  <?php require "Footer.php"; ?>;
+  <?php require "Footer.php"; ?>

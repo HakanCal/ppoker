@@ -6,6 +6,7 @@ class Usermenu extends Page implements PageInterface{
             //RESULTS
         }else{
             header('Location: index.php?page=Login');
+            exit;
         }
         $title = "i fucking hate it";
         $content = "JOHN CENA";

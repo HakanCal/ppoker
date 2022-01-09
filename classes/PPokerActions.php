@@ -33,10 +33,13 @@ class PPokerActions{
     }
     // CHECK IF USER PASSWORD IS REPEATED CORRECT
     public function validateRegistrationPassword($pwd, $repeatedpwd){
-        if(isset($pwd) && $pwd==$repeatedpwd){
-            return "";
+        if(empty($pwd)){
+            return "Sie benötigen ein Passwort!";
         }
-        return "Fehler die Passwörter stimmen nicht über ein <br>";    
+        if($pwd != $repeatedpwd){
+            return "Fehler die Passwörter stimmen nicht über ein <br>";    
+        }
+        return "";
     }
     function validateRegistration($regName, $regLastName,$regPwd, $regPwdRe, $regEmail): bool{ 
         $errors = array();
